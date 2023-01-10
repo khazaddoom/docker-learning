@@ -1,9 +1,11 @@
-FROM ubuntu
+FROM alpine:3.14
 
-# RUN apt-get update && apt-get install -y 
+RUN apk add nodejs npm
 
-# RUN ln -sf /dev/stdout /var/log/nginx/access.log
+COPY ./server /var/www/server-1
 
-# RUN ln -sf /dev/stderr /var/log/nginx/error.log
+WORKDIR /var/www/server-1
 
-# CMD ["nginx", "-g", "daemon off;"]
+RUN npm install
+
+CMD npm run dev
